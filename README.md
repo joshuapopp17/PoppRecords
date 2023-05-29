@@ -1,7 +1,7 @@
 ### Thank you for taking a look 😁
 
 # Popp Record Shop
-[Link to site]https://jolly-rabanadas-a5d0cd.netlify.app
+[Link to site](https://jolly-rabanadas-a5d0cd.netlify.app)
 
 ## Built with:
 - react
