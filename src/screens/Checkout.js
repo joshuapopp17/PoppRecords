@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Col, Row, Spinner, Stack } from 'react-bootstrap'
 import useCart from '../hooks/useCart'
 import { Link, useParams } from 'react-router-dom'
+import empty from '../assets/empty.png'
 
 const CheckoutItem = ({item, index}) => {
     const {removeFromCart} = useCart()
@@ -18,14 +19,27 @@ const CheckoutItem = ({item, index}) => {
                     />
                 </Link>
                 <div>
-                <h3>{item.title} - {item.size}</h3>
-                <h4>{item.artist}</h4>
+                <h4>{item.title} - {item.size}</h4>
+                <h5>{item.artist}</h5>
                 <h5>${item.price} + tax</h5>
                 <Stack gap={2}>
-                    <Button onClick={() => {removeFromCart(index)}} variant="outline-danger">Remove</Button>
+                    <Button style={{width: '150px'}} onClick={() => {removeFromCart(index)}} variant="outline-danger">Remove</Button>
                 </Stack>
                 </div>
              </Stack>
+        </div>
+    )
+}
+
+const PlaceHolder = () => {
+    return (
+        <div style={{width: '100%', display: "flex", justifyContent: 'center'}}>
+            <img
+              alt="no items"
+              src={empty}
+              className="d-inline-block align-top"
+              width={300}
+            />
         </div>
     )
 }
@@ -54,13 +68,14 @@ const Checkout = () => {
     <div>
         <Row>
             <Col sm="6">
-                {cart.length == 0 ? <h1>No items</h1> : cart.map((item, index) => {
+                <h3>Total items: {cart.length}</h3>
+                {cart.length == 0 ? <PlaceHolder /> : cart.map((item, index) => {
                     return <CheckoutItem item={item} index={index} key={index}></CheckoutItem>
                 })}
             </Col>
             <Col sm="6">
                 <Stack gap={2}>
-                    <h1>Checkout</h1>
+                    <h1 style={{fontWeight: 700}}>Checkout</h1>
                     <h3>Subtotal: {cart.length == 0 ? "..." :  "$" +(total).toFixed(2)}</h3>
                     <h4 style={{color: '#777'}}>Tax: {loading ? cart.length == 0 ? "..." :  "$" +(total * tax).toFixed(2) : " calculating ..."}</h4>
                     <h4 style={{color: '#777'}}>Shipping: {loading ?  cart.length == 0 ? "..." : "$" + shipping : " calculating ..."}</h4>

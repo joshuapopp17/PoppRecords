@@ -10,19 +10,16 @@ import useCart from '../hooks/useCart';
 import { Link } from 'react-router-dom';
 
 const NavContainer = () => {
-    const {total, getTotal} = useCart()
+    const {total, getTotal, cart} = useCart()
 
     useEffect(() => {
         getTotal()
     }, [])
 
   return (
-    <Navbar className='navbar-container' expand="lg" fixed="top">
+    <Navbar className='navbar-container d-flex' expand="lg" fixed="top">
       <Container className="justify-content-between">
-        <Nav>
-            <Nav.Link as={Link} to='/'>HOME</Nav.Link>
-        </Nav>
-        <Navbar.Brand as={Link} to='/'>
+        <Navbar.Brand as={Link} to='/' className='flex-1'>
             <img
               alt=""
               src={logo}
@@ -30,8 +27,8 @@ const NavContainer = () => {
               className="d-inline-block align-top"
             />
         </Navbar.Brand>
-        <Nav>
-            <Nav.Link as={Link} to='/checkout'>CART</Nav.Link>
+        <Nav className='flex-1'>
+            <Nav.Link as={Link} to='/checkout'><h5>CART {cart.length}</h5></Nav.Link>
         </Nav>
       </Container>
     </Navbar>

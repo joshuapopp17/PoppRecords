@@ -25,7 +25,7 @@ const Product = () => {
                         to='/'>Back to shop</Button>
         {loading ? <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}><Spinner></Spinner></div> :
         <Row>
-            <Col sm="6">
+            <Col sm="6" className='mb-4'>
                 <img
                   alt=""
                   src={item?.url}
